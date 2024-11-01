@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Input, Select, Button, Typography } from "antd";
+import { Form, Input, Select, Button, Typography, Row, Col } from "antd";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 
 const { Title, Text } = Typography;
@@ -7,7 +7,7 @@ const { Title, Text } = Typography;
 function Calculate() {
   const [calories, setCalories] = useState(null);
   const [display, setDisplay] = useState(false);
-  const [width, setWidth] = useState("800px");
+
   const calculateCalories = (values) => {
     const { age, weight, height, gender, activity } = values;
 
@@ -21,17 +21,11 @@ function Calculate() {
     const tdee = bmr * activity;
     setCalories(Math.round(tdee));
     setDisplay(true);
-    setWidth("300px");
   };
 
-  // Dữ liệu cho biểu đồ tròn
   const data = [
     { name: "Cookie", value: 49.3 },
     { name: "Remaining", value: calories ? calories - 49.3 : 0 },
-
-    // { name: "Carbs", value: 50 },
-    // { name: "Protein", value: 30 },
-    // { name: "Fat", value: 20 },
   ];
 
   const COLORS = ["#82ca9d", "#F86C22", "#ffc658"];
@@ -48,22 +42,21 @@ function Calculate() {
         backdropFilter: "blur(8px)",
       }}
     >
-      <div
+      <Row
         style={{
-          display: "flex",
           backgroundColor: "#ffffff",
           borderRadius: "12px",
           boxShadow: "0 8px 24px rgba(0, 0, 0, 0.15)",
           overflow: "hidden",
           maxWidth: "900px",
+          width: "100%",
         }}
       >
-        {/* Form */}
-        <div
+        <Col
+          xs={24}
+          md={12}
           style={{
             padding: "30px",
-            width: "50%",
-            minWidth: width,
             backgroundColor: "#ffffffcc",
           }}
         >
@@ -158,17 +151,17 @@ function Calculate() {
               Daily Caloric Needs: {calories} kcal
             </Text>
           )}
-        </div>
+        </Col>
 
-        {/* Content bên phải với hình nền, lớp phủ và biểu đồ tròn */}
-        {display ? (
-          <div
+        {display && (
+          <Col
+            xs={24}
+            md={12}
             style={{
               position: "relative",
               padding: "30px",
-              width: "50%",
               backgroundImage:
-                'url("https://giontan.vn/wp-content/uploads/2023/06/Bis-cam-720x720-1.jpg")', // Thay URL với ảnh nền của bạn
+                'url("https://giontan.vn/wp-content/uploads/2023/06/Bis-cam-720x720-1.jpg")',
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
               display: "flex",
@@ -176,7 +169,6 @@ function Calculate() {
               justifyContent: "center",
             }}
           >
-            {/* Lớp phủ trắng với opacity */}
             <div
               style={{
                 position: "absolute",
@@ -189,14 +181,13 @@ function Calculate() {
               }}
             ></div>
 
-            {/* Biểu đồ tròn bên trên lớp phủ */}
             <div
               style={{ position: "relative", zIndex: 2, textAlign: "center" }}
             >
               <Title level={3} style={{ color: "#4a5568" }}>
                 Nutrient Distribution
               </Title>
-              <PieChart width={400} height={400} style={{ margin: "auto" }}>
+              <PieChart width={300} height={300} style={{ margin: "auto" }}>
                 <Pie
                   data={data}
                   cx="50%"
@@ -217,18 +208,14 @@ function Calculate() {
               </PieChart>
 
               <Text style={{ color: "#2d3748", fontSize: "15px" }}>
-                {/* This chart represents the recommended nutrient distribution for
-              daily caloric intake. */}
                 One cookie accounts for about{" "}
                 {Math.round((49.3 * 100) / calories)} % of your total daily
                 calories
               </Text>
             </div>
-          </div>
-        ) : (
-          ""
+          </Col>
         )}
-      </div>
+      </Row>
     </div>
   );
 }
