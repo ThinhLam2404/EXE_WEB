@@ -26,6 +26,12 @@ function Calculate() {
     setCalories(Math.round(tdee));
     setDisplay(true);
   };
+  const validatePositiveNumber = (_, value) => {
+    if (value <= 0) {
+      return Promise.reject(new Error("Giá trị phải lớn hơn 0"));
+    }
+    return Promise.resolve();
+  };
 
   const data = [
     { name: "Lượng calo của bánh", value: 49.3 },
@@ -81,6 +87,7 @@ function Calculate() {
               name="age"
               rules={[
                 { required: true, message: "Vui lòng nhập tuổi của bạn" },
+                { validator: validatePositiveNumber },
               ]}
             >
               <Input type="number" placeholder="Nhập tuổi của bạn" />
@@ -91,6 +98,7 @@ function Calculate() {
               name="weight"
               rules={[
                 { required: true, message: "Vui lòng nhập cân nặng của bạn" },
+                { validator: validatePositiveNumber },
               ]}
             >
               <Input type="number" placeholder="Nhập cân nặng của bạn(kg)" />
@@ -101,6 +109,7 @@ function Calculate() {
               name="height"
               rules={[
                 { required: true, message: "Vui lòng nhập chiều cao của bạn" },
+                { validator: validatePositiveNumber },
               ]}
             >
               <Input type="number" placeholder="Nhập chiều cao của bạn(cm)" />
@@ -190,7 +199,7 @@ function Calculate() {
               <PieChart width={310} height={300} style={{ margin: "auto" }}>
                 <Pie
                   data={data}
-                  cx="53%"
+                  cx="52.5%"
                   cy="50%"
                   outerRadius={100}
                   dataKey="value"
