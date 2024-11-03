@@ -873,3 +873,44 @@ iconify-icon.quote {
   width: 10%;
   height: 80px;
 }
+.recharts-text {
+  font-size: 12px;
+}
+
+/* Điều chỉnh cho màn hình nhỏ */
+@media (max-width: 768px) {
+  /* Ẩn `info` trên màn hình nhỏ để tối ưu không gian */
+  .header-top .info {
+    display: none;
+  }
+
+  /* Đảm bảo logo có kích thước phù hợp */
+  .navbar-brand .logo {
+    max-width: 120px;
+  }
+
+  /* Căn chỉnh `social-links` vào giữa */
+  .header-top .social-links {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+/* Điều chỉnh cho màn hình rất nhỏ (dưới 576px) */
+@media (max-width: 576px) {
+  /* Đảm bảo các icon xã hội không bị quá to */
+  .social-links svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* Đặt header ở giữa */
+  .navbar {
+    text-align: center;
+  }
+
+  /* Điều chỉnh kích thước logo */
+  .navbar-brand .logo {
+    max-width: 100px;
+  }
+}

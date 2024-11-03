@@ -11,11 +11,11 @@ import Calculate from "../components/Calculate";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path="home" element={<Layout />}>
+      <Route element={<Layout />}>
         {/* <Route index element={<Home />}></Route> */}
         {/* <Route path="about" element={<h1>About Us</h1>} /> */}
+        <Route path="cal" element={<Calculate />}></Route>
       </Route>
-      <Route path="cal" element={<Calculate />}></Route>
     </Route>
   )
 );

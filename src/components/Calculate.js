@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { Form, Input, Select, Button, Typography, Row, Col } from "antd";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import "../assets/css/calculate.css";
+import imgChart1 from "../assets/images/cookieChart1.jpg";
+import imgChart2 from "../assets/images/cookieChart2.jpg";
+import imgChart3 from "../assets/images/cookieChart3.jpg";
 
 const { Title, Text } = Typography;
 
@@ -24,8 +28,8 @@ function Calculate() {
   };
 
   const data = [
-    { name: "Cookie", value: 49.3 },
-    { name: "Remaining", value: calories ? calories - 49.3 : 0 },
+    { name: "Lượng calo của bánh", value: 49.3 },
+    { name: "Lượng calo còn lại", value: calories ? calories - 49.3 : 0 },
   ];
 
   const COLORS = ["#82ca9d", "#F86C22", "#ffc658"];
@@ -61,7 +65,7 @@ function Calculate() {
           }}
         >
           <Title level={2} style={{ color: "#4a5568" }}>
-            Calorie Calculator
+            Công cụ tính calo
           </Title>
 
           <Form
@@ -73,52 +77,55 @@ function Calculate() {
             }}
           >
             <Form.Item
-              label="Age"
+              label="Tuổi"
               name="age"
-              rules={[{ required: true, message: "Please enter your age" }]}
+              rules={[
+                { required: true, message: "Vui lòng nhập tuổi của bạn" },
+              ]}
             >
-              <Input type="number" placeholder="Enter age" />
+              <Input type="number" placeholder="Nhập tuổi của bạn" />
             </Form.Item>
 
             <Form.Item
-              label="Weight (kg)"
+              label="Cân nặng (kg)"
               name="weight"
-              rules={[{ required: true, message: "Please enter your weight" }]}
+              rules={[
+                { required: true, message: "Vui lòng nhập cân nặng của bạn" },
+              ]}
             >
-              <Input type="number" placeholder="Enter weight in kg" />
+              <Input type="number" placeholder="Nhập cân nặng của bạn(kg)" />
             </Form.Item>
 
             <Form.Item
-              label="Height (cm)"
+              label="Chiều cao (cm)"
               name="height"
-              rules={[{ required: true, message: "Please enter your height" }]}
+              rules={[
+                { required: true, message: "Vui lòng nhập chiều cao của bạn" },
+              ]}
             >
-              <Input type="number" placeholder="Enter height in cm" />
+              <Input type="number" placeholder="Nhập chiều cao của bạn(cm)" />
             </Form.Item>
 
-            <Form.Item label="Gender" name="gender">
+            <Form.Item label="Giới tính" name="gender">
               <Select>
-                <Select.Option value="male">Male</Select.Option>
-                <Select.Option value="female">Female</Select.Option>
+                <Select.Option value="male">Nam</Select.Option>
+                <Select.Option value="female">Nữ</Select.Option>
               </Select>
             </Form.Item>
 
-            <Form.Item label="Activity Level" name="activity">
+            <Form.Item label="Cường độ tập luyện" name="activity">
               <Select>
                 <Select.Option value={1.2}>
-                  Sedentary (little or no exercise)
+                  Ít vận động (ít hoặc không tập thể dục)
                 </Select.Option>
                 <Select.Option value={1.375}>
-                  Lightly active (light exercise 1-3 days/week)
+                  Vận động nhẹ (tập nhẹ 1-3 ngày/tuần)
                 </Select.Option>
                 <Select.Option value={1.55}>
-                  Moderately active (moderate exercise 3-5 days/week)
+                  Hoạt động vừa phải (tập thể dục vừa phải 3-5 ngày/tuần)
                 </Select.Option>
                 <Select.Option value={1.725}>
-                  Very active (hard exercise 6-7 days/week)
-                </Select.Option>
-                <Select.Option value={1.9}>
-                  Super active (very hard exercise, physical job)
+                  Rất năng động (tập nặng 6-7 ngày/tuần)
                 </Select.Option>
               </Select>
             </Form.Item>
@@ -141,16 +148,10 @@ function Calculate() {
                   (e.currentTarget.style.backgroundColor = "#4299e1")
                 }
               >
-                Calculate
+                Tính
               </Button>
             </Form.Item>
           </Form>
-
-          {calories !== null && (
-            <Text strong style={{ fontSize: "18px", color: "#2d3748" }}>
-              Daily Caloric Needs: {calories} kcal
-            </Text>
-          )}
         </Col>
 
         {display && (
@@ -160,8 +161,7 @@ function Calculate() {
             style={{
               position: "relative",
               padding: "30px",
-              backgroundImage:
-                'url("https://giontan.vn/wp-content/uploads/2023/06/Bis-cam-720x720-1.jpg")',
+              backgroundImage: `url(${imgChart1})`,
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
               display: "flex",
@@ -185,12 +185,12 @@ function Calculate() {
               style={{ position: "relative", zIndex: 2, textAlign: "center" }}
             >
               <Title level={3} style={{ color: "#4a5568" }}>
-                Nutrient Distribution
+                Phân phối dinh dưỡng
               </Title>
-              <PieChart width={300} height={300} style={{ margin: "auto" }}>
+              <PieChart width={310} height={300} style={{ margin: "auto" }}>
                 <Pie
                   data={data}
-                  cx="50%"
+                  cx="53%"
                   cy="50%"
                   outerRadius={100}
                   dataKey="value"
@@ -206,11 +206,14 @@ function Calculate() {
                 <Tooltip />
                 <Legend />
               </PieChart>
-
+              <Text strong style={{ fontSize: "18px", color: "#2d3748" }}>
+                Nhu cầu calo hàng ngày: {calories} calo
+              </Text>
+              <br />
               <Text style={{ color: "#2d3748", fontSize: "15px" }}>
-                One cookie accounts for about{" "}
-                {Math.round((49.3 * 100) / calories)} % of your total daily
-                calories
+                Một cái bánh chứa 49.3 calo và chiếm khoảng{" "}
+                {Math.round((49.3 * 100) / calories)}% của tổng lượng calo hàng
+                ngày của bạn
               </Text>
             </div>
           </Col>

@@ -1,43 +1,55 @@
 import React from "react";
-import PropTypes from "prop-types";
+import "../assets/css/footer.css";
+import { Col, Row } from "antd";
+import {
+  EnvironmentFilled,
+  PhoneFilled,
+  MailFilled,
+  FacebookFilled,
+  InstagramFilled,
+} from "@ant-design/icons";
 
 const Footer = () => {
   return (
-    <div>
-      <footer class="row">
-        <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-          <h4 class="display-6 fw-normal">Quick links</h4>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a href="#" class="p-0">
-                {" "}
-                Home{" "}
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="p-0">
-                {" "}
-                Our Products{" "}
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="p-0">
-                {" "}
-                About us{" "}
-              </a>
-            </li>
-          </ul>
-        </div>
+    <div className="footer">
+      <Row className="container" gutter={[16, 16]}>
+        <Col xs={24} sm={12} md={8} className="footer-content">
+          <div className="footer-item--title">FANPAGE</div>
+          <a
+            href="https://www.facebook.com/profile.php?id=61567964282542"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FacebookFilled className="fb-icon" />
+          </a>
+          <InstagramFilled className="fb-icon" />
+        </Col>
 
-        <div class="col-md-6 col-lg-3 offset-lg-1 mb-4 mb-lg-0">
-          <p class="m-0">© Copyright 2024 SOKO.</p>
-          <p>Distributed By: Group 6 EXE101</p>
-        </div>
-      </footer>
+        <Col xs={24} sm={12} md={8} className="footer-content">
+          <div className="footer-item--title">CONTACT</div>
+          <div>
+            <EnvironmentFilled /> 600 Nguyễn Văn Cừ Nối Dài, Cần Thơ
+          </div>
+          <div>
+            <PhoneFilled /> +666 333 9999
+          </div>
+          <div>
+            <MailFilled /> customercare@sono.com
+          </div>
+        </Col>
+      </Row>
+
+      <Row
+        justify="center"
+        className="footer-bottom"
+        style={{ marginTop: "20px", textAlign: "center" }}
+      >
+        <Col span={24}>
+          © Copyright 2024 SOKO. Distributed By: Group 6 EXE101
+        </Col>
+      </Row>
     </div>
   );
 };
-
-Footer.propTypes = {};
 
 export default Footer;
